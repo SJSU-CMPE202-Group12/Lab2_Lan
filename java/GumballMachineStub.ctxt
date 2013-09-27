@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=count
+comment0.target=GumballMachineStub(int)
+comment1.params=
+comment1.target=void\ insertQuarter()
+comment2.params=
+comment2.target=void\ insertDime()
+comment3.params=
+comment3.target=void\ insertNickel()
+comment4.params=
+comment4.target=void\ turnCrank()
+comment5.params=
+comment5.target=boolean\ isGumballInSlot()
+comment6.params=
+comment6.target=void\ takeGumballFromSlot()
+numComments=7
