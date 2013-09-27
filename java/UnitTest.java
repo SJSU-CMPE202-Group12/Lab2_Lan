@@ -149,10 +149,12 @@ public class UnitTest
         System.out.println("\nTC: SoldOut");
         m1.insertQuarter();
         m1.insertQuarter();
+        m1.insertQuarter();
+        m1.insertQuarter();
         m1.turnCrank();
         m1.insertQuarter();
         m1.insertQuarter();
-	m1.insertDime();
+        m1.insertDime();
         m1.turnCrank();
         assertEquals(true, m1.isGumballInSlot());
         m1.takeGumballFromSlot();
@@ -167,7 +169,7 @@ public class UnitTest
         m1.insertQuarter();
         m1.insertDime();
         m1.insertNickel();
-		m1.insertQuarter();
+        m1.insertQuarter();
         m1.turnCrank();
         assertEquals(false, m1.isGumballInSlot());
     }
