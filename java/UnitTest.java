@@ -167,6 +167,7 @@ public class UnitTest
         m1.insertQuarter();
         m1.insertDime();
         m1.insertNickel();
+		m1.insertQuarter();
         m1.turnCrank();
         assertEquals(false, m1.isGumballInSlot());
     }
