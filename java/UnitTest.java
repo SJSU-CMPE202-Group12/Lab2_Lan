@@ -15,6 +15,7 @@ public class UnitTest
 {
     //private GumballMachineStub m1;
     private GumballMachine m1;
+    private GumballMachine m2;
 
     /**
      * Default constructor for test class UnitTest
@@ -33,6 +34,7 @@ public class UnitTest
     {
         //m1 = new GumballMachineStub(3);
         m1 = new GumballMachine(3);
+        m2 = new GumballMachine(0);
     }
 
     /**
@@ -48,40 +50,31 @@ public class UnitTest
     @Test
     public void NoCoin()
     {
-        System.out.println("\nTC: NoCoin");
+        System.out.println("\nTC: No coin in the machine");
         assertEquals(false, m1.isGumballInSlot());
     }
 
     @Test
     public void NeedCoin1()
     {
-        System.out.println("\nTC: NeedCoin1");
+        System.out.println("\nTC: Not enough coin in the machine");
         m1.insertDime();
-        m1.turnCrank();
         assertEquals(false, m1.isGumballInSlot());
     }
 
     @Test
     public void NeedCoin2()
     {
-        System.out.println("\nTC: NeedCoin2");
+        System.out.println("\nTC: Not enough coin in the machine and we turn the crank");
         m1.insertNickel();
         m1.turnCrank();
         assertEquals(false, m1.isGumballInSlot());
     }
 
     @Test
-    public void NeedCoin3()
-    {
-        System.out.println("\nTC: NeedCoin3");
-        m1.insertQuarter();
-        assertEquals(false, m1.isGumballInSlot());
-    }
-
-    @Test
     public void NeedCoin4()
     {
-        System.out.println("\nTC: NeedCoin4");
+        System.out.println("\nTC: Not enough coin in the machine");
         m1.insertDime();
         m1.insertNickel();
         m1.insertQuarter();
@@ -90,9 +83,9 @@ public class UnitTest
     }
 
     @Test
-    public void EnoughCoin1()
+    public void EnoughCoinWithoutChange()
     {
-        System.out.println("\nTC: EnoughCoin1");
+        System.out.println("\nTC: Enough coin in the machine and we get a gumball without change");
         m1.insertDime();
         m1.insertDime();
         m1.turnCrank();
@@ -103,12 +96,13 @@ public class UnitTest
     }
     
     @Test
-    public void EnoughCoin2()
+    public void EnoughCoinWithChange()
     {
-        System.out.println("\nTC: EnoughCoin2");
+        System.out.println("\nTC: Enough coin in the machine and we get a gumball with change");
         m1.insertDime();
         m1.insertDime();
         m1.turnCrank();
+        assertEquals(false, m1.isGumballInSlot());
         m1.insertQuarter();
         m1.insertDime();
         m1.turnCrank();
@@ -118,7 +112,7 @@ public class UnitTest
     @Test
     public void TakeGumball1()
     {
-        System.out.println("\nTC: TakeGumball1");
+        System.out.println("\nTC: get the gumball and return the change, take a gumball away");
         m1.insertQuarter();
         m1.insertQuarter();
         m1.insertQuarter();
@@ -133,20 +127,31 @@ public class UnitTest
     @Test    
     public void TakeGumball2()
     {
-        System.out.println("\nTC: TakeGumball2");
+        System.out.println("\nTC: turn the crank twice, get one gumball, and take the gumball away");
         m1.insertQuarter();
         m1.insertQuarter();
-        m1.turnCrank();
-        m1.turnCrank();
+        m1.turnCrank();        
         assertEquals(true, m1.isGumballInSlot());
         m1.takeGumballFromSlot();
         assertEquals(false, m1.isGumballInSlot()); 
+		m1.turnCrank();
+		assertEquals(false, m1.isGumballInSlot()); 
+    }
+
+    @Test    
+    public void SoldOut1()
+    {
+        System.out.println("\nTC: machine is initialized with 0 gumball");
+        m2.insertQuarter();
+        m2.insertQuarter();
+        m2.turnCrank();
+        assertEquals(false, m2.isGumballInSlot());
     }
     
     @Test    
-    public void SoldOut()
+    public void SoldOut2()
     {
-        System.out.println("\nTC: SoldOut");
+        System.out.println("\nTC: insert coin, turn the crank, get the gumball and change, keep doing until the gumball sold out");
         m1.insertQuarter();
         m1.insertQuarter();
         m1.insertQuarter();

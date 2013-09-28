@@ -6,7 +6,8 @@ public class GumballMachine implements IGumballMachine {
     State needCoinState;
     State enoughCoinState;
     State soldState; 
-    State state = soldOutState;
+    State state;
+    
     int count = 0;  // the number of gumballs in machine
     int cents;  // the amount of cents in machine
     int ballsInSlot = 0; // the number of gumballs in slot
@@ -16,13 +17,16 @@ public class GumballMachine implements IGumballMachine {
         soldOutState = new SoldOutState(this);
         needCoinState = new NeedCoinState(this);
         enoughCoinState = new EnoughCoinState(this);
-        soldState = new SoldState(this);
+        soldState = new SoldState(this);        
 
         this.count = numberGumballs;
         this.cents = 0;
         if (numberGumballs > 0) {
             state = needCoinState;
         } 
+        else {
+            state = soldOutState;
+        }
     }
     
     public void insertQuarter( ) {
